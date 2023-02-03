@@ -11,7 +11,9 @@ export default{
     },
     methods:{
         setEditorContent(){
+
                 this.$emit('content',this.content);
+                this.content=""
         }
     }
 }

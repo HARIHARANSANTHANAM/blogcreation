@@ -14,7 +14,6 @@
     position: -webkit-sticky;
     position: sticky;
     top: 0rem;
-    z-index: 1000;
     height: calc(100vh - 0rem);
 }
 a .active{

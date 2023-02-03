@@ -1,22 +1,25 @@
+const Ipaddress="http://10.30.1.164"
+// const Ipaddress="http://192.168.0.109"
+// const Ipaddress="http://192.168.224.121"
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
   transpileDependencies: true,
   devServer: {
     proxy: {
       '/one': {
-        target: 'http://10.30.1.164:8080',
+        target: `${Ipaddress}:8080`,
         pathRewrite: {'^/one' : ''}
       },
       '/two': {
-        target: 'http://10.30.1.164:8082',
+        target: `${Ipaddress}:8082`,
         pathRewrite: {'^/two' : ''}
       },
       '/three':{
-        target:'https://10.30.1.164:8083',
+        target:`${Ipaddress}:8083`,
         pathRewrite:{'^/three':''}
       },
       '/four':{
-        target:'https://10.30.1.164:8087',
+        target:`${Ipaddress}:8087`,
         pathRewrite:{'^/four':''}
       }
     }

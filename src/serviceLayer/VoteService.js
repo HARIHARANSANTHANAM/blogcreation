@@ -1,9 +1,20 @@
 import axios from 'axios'
 
+export const Vote = axios.create({
+    baseURL: "/two",
+    headers: {
+      "content-type": "application/json",
+    },
+});
+const VoteURL={
+    getVotes:"three/vote/getVoteStatus",
+    updateVote:"three/vote/addvote"
+}
 
-const authUser=({success,fail,data})=>{
-   // const {email,password}=data;
-    axios.post(`one/user/userLogin`,data)
+
+const getVoteStatus=({success,fail,data})=>{
+    const {votedfor,userId,type}=data
+    axios.get(VoteURL.getVotes+`?votedfor=${votedfor}&userId=${userId}&type=${type}`)
     .then((res)=>{
         if(res.status===200){
         success(res);
@@ -18,9 +29,8 @@ const authUser=({success,fail,data})=>{
     })
 }
 
-const signUpUser=({success,fail,data})=>{
-    // const {userName,password,email,jobPosition}=data;
-    axios.post(`one/user/addUser`,data)
+const UpdateVote=({success,fail})=>{
+    axios.post(VoteURL.updateVote)
     .then((res)=>{
         if(res.status===200){
         success(res);
@@ -37,5 +47,6 @@ const signUpUser=({success,fail,data})=>{
 
 
 
-export default {authUser,signUpUser}
+
+export default {UpdateVote,getVoteStatus}
 

@@ -24,6 +24,8 @@
     <b-spinner small type="grow"></b-spinner>
     Loading...
   </b-button>
+    <br/>
+       <router-link to="/signup"> <b-button type="submit" variant="info"  class="button btn-block"  >Signup</b-button></router-link>
         </form>
         </div>
         </div>

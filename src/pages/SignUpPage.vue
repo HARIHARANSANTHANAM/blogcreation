@@ -6,6 +6,13 @@
         <p class="text-secondary">QBloggers</p>  
         </center>
           <br>
+          <div class="alert alert-danger" role="alert" v-if="user.password !== repeatPassword">
+            Mismatched Password!
+        </div>
+       
+        <div v-if="errors.password" class="alert alert-danger" role="alert" >
+            {{ errors.password }}
+        </div>
     <form @submit.prevent="addUser()">
       <!-- Username input -->
       <div class="form-outline mb-4">
@@ -36,24 +43,26 @@
       <div class="form-outline mb-4">
 
         <label class="form-label text-secondary">Confirm password</label>
-        <input type="password" v-model="user.repeatPassword" class="form-control" required/>
+        <input type="password" v-model="repeatPassword" class="form-control" required/>
       </div>
         </b-col>
     </b-row>
        <div class="form-outline mb-4">
 
         <label class="form-label text-secondary" >Job Description</label>
-        <input type="text" id="registerName" v-model="user.jobdescription" class="form-control" required/>   
+        <input type="text" v-model="user.jobPosition" class="form-control" required/>   
       </div>
 
       <div class="form-outline mb-4">
-      <Multiselect v-model="selectedOptions" :options="options" :multiple="true" label="text" track-by="value" class="custom-multiselect">
-    </Multiselect>
+      <label class="form-label text-secondary" >Interested Tags</label>
+      <SelectTags @input="inputSelectTags" :tags="tags"/>
       </div>
-       
+  
         
       <!-- Submit button -->
       <button type="submit" class="btn btn-info btn-block mb-3">Sign Up</button>
+       <router-link to="/"> <b-button type="submit" variant="info"  class="button btn-block"  >Signin</b-button></router-link>
+      
     </form>
     </div>
 </div>

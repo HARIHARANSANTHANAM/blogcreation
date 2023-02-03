@@ -1,7 +1,8 @@
 <template>
   <div class="column">
     <button @click="vote(1)" class="btn btn-info"><i class="fa-sharp fa-solid fa-thumbs-up"></i></button>
-    <p>{{ initialCounter }}</p>
+    <p>{{ upvoteCount}}</p>
+    <p>{{downvoteCount}}</p>
     <button @click="vote(-1)" class="btn btn-dark"><i class="fa-sharp fa-solid fa-thumbs-down"></i></button>
   </div>
 </template>

@@ -2,17 +2,20 @@ import { mapActions} from "vuex";
 import Usermixins from '@/mixins/Usermixins';
 import Links from '../../componentConfig/Links'
 import SidebarComponent from '../SidebarComponent.vue';
-import SearchComponent from '../SearchComponent.vue'
+import SearchComponent from '../SearchComponent.vue';
+import CreateQuestions from '../CreateQuestions.vue'
 
 export default{
     name:'NavbarComponent',
     components:{
         SidebarComponent,
-        SearchComponent
+        SearchComponent,
+        CreateQuestions
     },
     data(){
         return{
-            links:Links
+            links:Links,
+            showQuestionModal:false
         }
     },
     mixins:[Usermixins],
@@ -22,6 +25,10 @@ export default{
         alert("Logged Out!!")
         this.AUTH_LOGOUT();
         this.$router.push('/')
+    },
+    content(value)
+    {
+        console.log(value)
     }
     }
 }

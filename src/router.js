@@ -3,8 +3,11 @@ import HomePage from './pages/homePage.vue';
 import BlogPage from './pages/BlogPage.vue';
 import SignUpPage from './pages/SignUpPage.vue';
 import TagPage from './pages/TagPage.vue';
+import BlogPagebyTag from './pages/BlogPagebyTag.vue';
 import VueRouter from 'vue-router';
 import NotFound from './components/NotFound.vue'
+import QuestionPage from './pages/Questions/QuestionPage';
+import MyQuestionsPage from './pages/Questions/MyQuestionsPage';
 
 const routerconfig=new VueRouter({
     mode:'history',
@@ -37,6 +40,18 @@ const routerconfig=new VueRouter({
         {
             path: '*',
             component: NotFound
+          },
+          {
+            path: '/tagpage',
+            component: BlogPagebyTag
+          },
+          {
+            path:'/MyQuestions',
+            component:MyQuestionsPage,
+          },
+          {
+            path:'/CreateQuestions',
+            component:QuestionPage
           }
    ]
 })
@@ -52,7 +67,7 @@ routerconfig.beforeEach((to, from, next) => {
     {
       next();
     }
-    else if (to.path === '/' && isLoggedIn) {
+    else if ((to.path=== '/signup' || to.path === '/') && isLoggedIn) {
       next('/home');
     } 
     else if(to.path === '/home' && !isLoggedIn){

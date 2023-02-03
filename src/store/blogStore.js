@@ -36,6 +36,30 @@ const blogStore={
                 },
                 data
             })
+        },
+        FETCH_BLOG_BY_TAG:({commit},{success,fail,data})=>{
+            BlogService.fetchBlogByTag({
+                success:(res)=>{
+                    commit("setBlogs",res.data);
+                    success(res.data)
+                },
+                fail:(err)=>{
+                    fail(err)
+                },
+                data
+            })
+        },
+        FETCH_BLOGS_BY_USERID:({commit},{success,fail,data})=>{
+            BlogService.fetchBlogByUserId({
+                success:(res)=>{
+                    commit("setBlogs",res.data);
+                    success(res.data)
+                },
+                fail:(err)=>{
+                    fail(err)
+                },
+                data
+            })
         }
         
     },
@@ -50,5 +74,9 @@ const blogStore={
     },
     namespaced:true
 }
+
+
+
+
 
 export default blogStore;

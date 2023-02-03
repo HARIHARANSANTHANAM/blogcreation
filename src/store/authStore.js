@@ -36,6 +36,17 @@ const authStore={
           },
          AUTH_LOGOUT({commit}){
               commit("setLogout");
+          },
+          AUTH_SIGNUP({commit},{success,fail,data}){
+            console.log(commit)
+            AuthService.signUpUser({data,
+                success:(res)=>{
+                    alert("Added Successfully")
+                    success(res.data)
+                },
+                fail:(err)=>{
+                    fail(err)
+                }})
           }
     },
     getters:{

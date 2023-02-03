@@ -1,18 +1,54 @@
 
 <template>
-<div> 
-    <div class="row">
-        <div class="col-1">
-            <VotingComponent/>
-        </div>
-        <div class="col">
-             <h2>{{getSelectedBlog?.title}}</h2>
-            <p>{{getSelectedBlog?.description+'Though it helps many people, this medication may sometimes cause addiction. This risk may be higher if you have a substance use disorder (such as overuse of or addiction to drugs/alcohol). Take this medication exactly as prescribed to lower the risk of addiction. Ask your doctor or pharmacist for more details.Do not suddenly stop using this drug without consulting your doctor. Some conditions may become worse when this drug is abruptly stopped. Your dose may need to be gradually decreased.When this medication is used for a long time, it may not work as well. Talk with your doctor if this medication stops working well.Tell your doctor if your condition persists or worsens.'}}</p>
-           
-        </div>
+  <div>
+    <div class="d-flex justify-content-center mb-3" v-if="loader">
+      <b-spinner label="Loading..."></b-spinner>
     </div>
-     <TextEditor @content="fetchContent"/>
-  
-</div>
+    <div v-else>
+      <QAContainer Type="BLOG" :id="parseInt($route.query.blogId)">
+        <template v-slot:content>
+          <h2>{{ getSelectedBlog?.title }}</h2>
+          <div class="bg-light" v-html="getSelectedBlog?.blogdescription"></div>
+          <div style="display: flex; justify-content: end">
+            <p class="text-info">
+              Updated
+              <timeago :datetime="getSelectedBlog?.updatedatetime"></timeago>
+            </p>
+          </div>
+        </template>
+      </QAContainer>
+      <br />
+      <hr />
+      <h4>Answers</h4>
+      <div class="container">
+        <QAContainer
+          v-for="(answer, index) in answers"
+          :key="index"
+          Type="ANSWER"
+          :id="answer?.ansid"
+          :data="answer"
+        >
+          <template v-slot:content>
+            <AnswerContainer :data="answer" />
+            <div class="row justify-content-end">
+              <b-button variant="info mt-3">View Comment</b-button>
+            </div>
+            <h5>Comments</h5>
+            <CommentContainer :comments="commentdata"/>
+                </template>
+        </QAContainer>
+      </div>
+      <b-badge
+        variant="info"
+        v-for="(tags, index) in getSelectedBlog?.blogTags"
+        :key="index"
+        >{{ tag }}</b-badge
+      >
+      <br />
+      <p>Your Answer</p>
+      <hr />
+      <TextEditor @content="fetchContent" />
+    </div>
+  </div>
 </template>
 <script src="./js/blog.js"/>
