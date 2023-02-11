@@ -1,18 +1,24 @@
 <template>
-  <div class="column">
-    <button @click="vote(1)" class="btn btn-info"><i class="fa-sharp fa-solid fa-thumbs-up"></i></button>
-    <p>{{ upvoteCount}}</p>
-    <p>{{downvoteCount}}</p>
-    <button @click="vote(-1)" class="btn btn-dark"><i class="fa-sharp fa-solid fa-thumbs-down"></i></button>
+  <div class="row">
+    <b-icon
+      icon="caret-up"
+      aria-hidden="true"
+      style="font-size: 1.5rem"
+    ></b-icon>
+    <b-icon
+      icon="caret-down"
+      aria-hidden="true"
+      style="font-size: 1.5rem"
+    ></b-icon>
   </div>
 </template>
 
 <script src="./js/voting"/>
 <style scoped>
-.column{
+.row {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
-  justify-content: space-around;
 }
 </style>

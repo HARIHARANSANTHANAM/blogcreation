@@ -20,12 +20,14 @@ const routerconfig=new VueRouter({
         {
             path:'/home',
             name:'HomePage',
-            component:HomePage
+            component:HomePage,
+            meta: { transition: 'slide-right' },
         },
         {
             path:'/blog',
             name:'BlogPage',
-            component:BlogPage
+            component:BlogPage,
+            meta: { transition: 'slide-right' },
         },
         {
             path:'/Signup',
@@ -35,7 +37,8 @@ const routerconfig=new VueRouter({
         {
             path:'/Tag',
             name:'TagPage',
-            component:TagPage
+            component:TagPage,
+            meta: { transition: 'slide-right' },
         },
         {
             path: '*',
@@ -48,6 +51,8 @@ const routerconfig=new VueRouter({
           {
             path:'/MyQuestions',
             component:MyQuestionsPage,
+
+            meta: { transition: 'slide-right' },
           },
           {
             path:'/CreateQuestions',

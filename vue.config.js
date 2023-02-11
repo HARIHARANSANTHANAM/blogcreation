@@ -1,4 +1,7 @@
-const Ipaddress="http://10.30.1.164"
+const Ipaddress="http://10.30.1.114"
+const ServiceOneIpaddress="http://10.30.1.114:8080"
+const ServiceTwoIpaddress="http://10.30.1.114:8082"
+const ServiceThreeIpaddress="http://10.30.1.114:8083"
 // const Ipaddress="http://192.168.0.109"
 // const Ipaddress="http://192.168.224.121"
 const { defineConfig } = require('@vue/cli-service')
@@ -7,15 +10,15 @@ module.exports = defineConfig({
   devServer: {
     proxy: {
       '/one': {
-        target: `${Ipaddress}:8080`,
+        target: `${ServiceOneIpaddress}`,
         pathRewrite: {'^/one' : ''}
       },
       '/two': {
-        target: `${Ipaddress}:8082`,
+        target: `${ServiceTwoIpaddress}`,
         pathRewrite: {'^/two' : ''}
       },
       '/three':{
-        target:`${Ipaddress}:8083`,
+        target:`${ServiceThreeIpaddress}`,
         pathRewrite:{'^/three':''}
       },
       '/four':{

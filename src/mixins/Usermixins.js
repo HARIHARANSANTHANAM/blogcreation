@@ -14,8 +14,10 @@ export default{
                 fail:this.onFailFetchEmp
             })
         },
+        isAuthorized(userId){
+            return (this.getUser?.userid && this.isadmin()) || (this.getUser?.userid && this.getUser?.userid===userId)
+        },
         isadmin(){
-            console.log(this.getUser);
            return this.getUser?.admin;
         },
         onSuccessFetchEmp(res){

@@ -1,22 +1,32 @@
 <template>
-    <div>
+  <div>
     <h4>Top Blogs</h4>
-      <hr/> 
-    <div class="row">
-     <BlogCard  @click="fetchThisBlog(blog?.blogid)" style="cursor:pointer;border-left:.5rem solid #17a2b8"  class="col-lg-12 mb-2" v-for="(blog,index) in getBlogs" :key="index">
-     <template v-slot:title>
-        {{blog?.title}}
-     </template>
-    <template v-slot:description >
-    <div :inner-html.prop="blog?.blogdescription | truncate(40)"></div>
-    </template>
-    <template v-slot:footer>
-      Created
-      <timeago :datetime="blog?.createdatetime"></timeago>
-    </template>
-     </BlogCard>
-</div>
-    
+    <hr />
+    <div class="d-flex justify-content-center mb-3" v-if="loader">
+      <b-spinner label="Loading..."></b-spinner>
     </div>
+    <div class="row" v-else>
+      <BlogCard
+        @click="fetchThisBlog(blog?.blogId)"
+        @edit="editBlog"
+        :blog="blog"
+        style="cursor: pointer; border-left: 0.5rem solid #17a2b8"
+        class="col-lg-12 mb-2"
+        v-for="(blog, index) in getBlogs"
+        :key="index"
+      >
+      </BlogCard>
+      <b-modal
+        scrollable
+        title="Update Question"
+        id="updateQuestion"
+        hide-footer
+      >
+        <CreateQuestions type="UPDATE" :datas="updateblog" />
+      </b-modal>
+    </div>
+  </div>
 </template>
 <script src="./js/home.js"/>
+<style scoped>
+</style>

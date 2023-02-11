@@ -5,5 +5,5 @@ export default{
     components:{
         CreateQuestions
     },
-   
+
 }

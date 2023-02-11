@@ -2,8 +2,9 @@ import TagMixins from "@/mixins/TagMixins";
 import SelectTags from "../SelectTags";
 import BlogMixins from '@/mixins/BlogMixins'
 import { mapGetters } from "vuex";
-import TextEditorComponent from '../../components/TextEditorComponent'
 import Vue from 'vue'
+import { VueEditor } from "vue2-editor";
+
 
 function initialState (){
     return {
@@ -13,8 +14,6 @@ function initialState (){
             thingsTried:'',
             tagId:[]
         },
-        message: '',
-        messageVariant: '',
         tags:[]
     }
   }
@@ -25,18 +24,44 @@ export default{
     },
     components:{
         SelectTags,
-        TextEditorComponent
+        VueEditor
     },  
     mixins:[TagMixins,BlogMixins],
-    mounted(){
-        this.fetchTags({
-            success:(res)=>{
-                this.tags=res;
-        },
-        fail:(err)=>{
-            console.log(err)
+   created(){
+       let propsdata=this.datas;
+       
+       console.log(propsdata)
+        this.data={title:propsdata.title,
+            description:propsdata.blogDescription,
+            thingsTried:propsdata.thingsTried,
         }
-    })
+        let options=propsdata.blogtags.map(tag=>{
+            return {value:tag?.tagid,text:tag?.tagname}
+        })
+        console.log(options);
+        this.$data.data.tagId=options;
+   },
+   mounted(){
+    if(this.tags?.length==0){
+    this.fetchTags({
+        success:(res)=>{
+            this.tags=res;
+    },
+    fail:(err)=>{
+        console.log(err)
+    }});
+   }},
+    props:{
+        Type:{
+            type:String,
+            validator:(val)=> ['UPDATE','CREATE'].includes(val),
+            default:'CREATE'
+        },
+        datas:{
+            type:Object,
+            default:{},
+            required:false
+        }
     },
     computed:{
         ...mapGetters('authStore',['getUser']),
@@ -55,14 +80,6 @@ export default{
             let data=value.map(value=>{return {'tagid':value.value,'tagname':value.text}});
             this.data.tagId=data;
         },
-        fetchDescription(description){
-            console.log(description)
-            this.data.description=description;
-        },
-        fetchTried(tried){
-            console.log(tried)
-            this.data.thingsTried=tried;
-        },
         createQuestions(){
             console.log(this.$data)
             let data=this.$data.data;
@@ -75,6 +92,7 @@ export default{
                         position: 'top',
                         duration:3000
                     })
+                    this.$router.push('/MyQuestions');
                     Object.assign(this.$data, initialState());
                 },
                 fail:(err)=>{

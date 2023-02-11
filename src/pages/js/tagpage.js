@@ -1,26 +1,34 @@
 import CreateTag from "@/components/CreateTag"
 import { mapActions, mapGetters } from "vuex"
-import BlogCard from '../../components/BlogCard.vue'
+import TagCard from '../../components/TagCard.vue'
 
 export default{
     name:'TagPage',
     components:{
         CreateTag,
-        BlogCard
+        TagCard
     },
     mounted(){
+        this.loader=true;
             this.FETCH_TAGS({
                 success:this.handleSuccessFetchTags,
                 fail:this.handleFailFetchTags
             })
     },
+    data(){
+        return{
+            loader:false
+        }
+    },
     methods:{
         ...mapActions('tagStore',['FETCH_TAGS']),
         handleSuccessFetchTags(res){
             console.log(res);
+            this.loader=false;
         },
         handleFailFetchTags(err){
             console.log(err);
+            this.loader=false;
         },
          fetchTagsBlog(tagId){
             this.$router.push({path:'/tagPage',query:{tagId:tagId}})

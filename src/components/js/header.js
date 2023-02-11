@@ -4,6 +4,7 @@ import Links from '../../componentConfig/Links'
 import SidebarComponent from '../SidebarComponent.vue';
 import SearchComponent from '../SearchComponent.vue';
 import CreateQuestions from '../CreateQuestions.vue'
+import Vue from 'vue';
 
 export default{
     name:'NavbarComponent',
@@ -22,8 +23,12 @@ export default{
     methods:{
         ...mapActions('authStore',['AUTH_LOGOUT']),
     logout(){
-        alert("Logged Out!!")
+       
         this.AUTH_LOGOUT();
+        Vue.$toast.error("Logged Out", {
+            position: 'top',
+            duration:3000
+        })
         this.$router.push('/')
     },
     content(value)

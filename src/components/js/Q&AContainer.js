@@ -8,6 +8,8 @@ export default{
     },
     data(){
         return {
+            newcomment:'',
+            showReply:false
         }
     },
     props:{
@@ -20,11 +22,23 @@ export default{
             required:true
         },
         data:{
-            type:{}
+            type:Object
         }
     },
     computed:{
         ...mapGetters('authStore',['getUser'])
+    },
+    methods:{
+        addComment(){
+            
+            const data={
+                content:this.newcomment,
+                commentFor:this.id,
+                type:this.Type,
+                commentedby:this.getUser?.userid
+            }
+            console.log(data)
+        }
     },
     mounted(){
         const data={votedfor:this.id,userId:this.getUser?.userid,type:this.Type}

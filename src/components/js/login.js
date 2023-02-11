@@ -1,4 +1,5 @@
 import {mapActions} from 'vuex'
+import Vue from 'vue'; 
 export default{
     name:'LoginComponent',
     data(){
@@ -30,11 +31,19 @@ export default{
         handlesuccessLogin(data){
             this.login=false;   
             console.log(data);
+            Vue.$toast.success('Logged In Successfully', {
+                position: 'top',
+                duration:3000
+            })
             this.$router.push({path:'/home'})
         },
         handlefailLogin(err)
         {
             this.login=false;
+            Vue.$toast.error(err.response.data, {
+                position: 'top',
+                duration:3000
+            })
             console.log(err);
         }
     }

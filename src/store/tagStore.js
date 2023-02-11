@@ -12,6 +12,25 @@ const TagStore={
         setSelectedTag(state,Tag)
         {
             state.selectedTag=Tag;
+        },
+        addNewTag(state,tag)
+        {
+            state.tags=[...state.tags,tag]
+        },
+        deleteTag(state,deleteTagId){
+            let index = state.tags.map(item => item.tagId).indexOf(deleteTagId) 
+            state.tags.splice(index, 1) 
+        },
+        updateTag(state,updateTag){
+            state.tags=state.tags.map(tag=> {
+                if(tag?.tagId===updateTag?.tagId)
+                {
+                    return updateTag;
+                }
+                else{
+                    return tag;
+                }
+            })
         }
     },
     actions:{
@@ -36,8 +55,48 @@ const TagStore={
                 },
                 data
             })
+        },
+        UPDATE_TAG:({commit},{success,fail,data})=>{
+            TagService.updateTag({
+                success:(res)=>{
+                    console.log(res.data)
+                    commit("updateTag",res.data);
+                    success(res.data)
+                },
+                fail:(err)=>{
+                    fail(err)
+                },
+                data
+            })
+        },
+        ADD_NEW_TAG:({commit},{success,fail,data})=>{
+            TagService.addTag({
+                success:(res)=>{
+                    console.log(res)
+                    commit("addNewTag",res.data)
+                    success(res)
+                },
+                fail:(err)=>{
+                    fail(err)
+                    console.log(err)
+                },
+                data
+            })
+        },
+        DELETE_TAG:({commit},{success,fail,data})=>{
+            TagService.deleteTag({
+                success:(res)=>{
+                    console.log(res)
+                    commit("deleteTag",data.tagId)
+                    success(res)
+                },
+                fail:(err)=>{
+                    fail(err)
+                    console.log(err)
+                },
+                data
+            })
         }
-        
     },
     getters:{
         getTags(state){
