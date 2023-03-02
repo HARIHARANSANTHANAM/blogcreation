@@ -40,9 +40,9 @@ export default{
               },
               errors() {
                 let errors = {}
-                if (this.user.password.length < 8) {
+                if (this.user.password && this.user.password.length < 8) {
                   errors.password = 'Password must be at least 8 characters'
-                } else if (!/\d/.test(this.user.password)) {
+                } else if (this.user.password &&  !/\d/.test(this.user.password)) {
                   errors.password = 'Password must contain a number'
                 }
                 return errors

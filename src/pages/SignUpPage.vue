@@ -1,15 +1,9 @@
 <template>
   <div class="signup_container">
     <div class="signup_box">
-      <center>
-        <img
-          :src="require('@/assets/images.jpeg')"
-          width="80"
-          height="80"
-          style="border-radius: 10px"
-        />
-        <p class="text-secondary">QBloggers</p>
-      </center>
+       
+        <h4>QBloggers Signup</h4>
+        <hr/>
       <br />
       <div
         class="alert alert-danger"

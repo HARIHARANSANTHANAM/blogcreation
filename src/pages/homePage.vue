@@ -1,11 +1,16 @@
 <template>
   <div>
-    <h4>Top Blogs</h4>
-    <hr />
-    <div class="d-flex justify-content-center mb-3" v-if="loader">
-      <b-spinner label="Loading..."></b-spinner>
+    <h4 >Top Blogs</h4>
+      <hr />
+    <div class="" v-if="loader">
+      <b-card v-for="(skeleton,index) in Array.from(Array(10).keys())" class="mb-3" :key="index">
+        <b-skeleton animation="wave" width="85%"></b-skeleton>
+        <b-skeleton animation="wave" width="55%"></b-skeleton>
+        <b-skeleton animation="wave" width="70%"></b-skeleton>
+      </b-card>
     </div>
     <div class="row" v-else>
+    
       <BlogCard
         @click="fetchThisBlog(blog?.blogId)"
         @edit="editBlog"

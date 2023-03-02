@@ -19,6 +19,7 @@
               type="email"
               placeholder="EmailId"
               v-model="email"
+              data-test="email"
             ></b-form-input>
           </b-col>
         </b-row>
@@ -30,6 +31,7 @@
               type="password"
               placeholder="Password"
               v-model="password"
+              data-test="password"
             ></b-form-input>
           </b-col>
         </b-row>
@@ -39,7 +41,8 @@
           variant="info"
           v-if="!login"
           class="button btn-block"
-          :disabled="validator()"
+          :disabled="validator"
+          data-test="login-button"
           >Login</b-button
         >
         <b-button class="button btn-block" v-else disabled>
@@ -67,7 +70,7 @@
 }
 .login_container {
   position: absolute;
-  top: 30%;
+  top: 50%;
   left: 50%;
   min-width: 350px;
   transform: translate(-50%, -50%);
