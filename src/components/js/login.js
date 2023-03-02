@@ -1,5 +1,5 @@
 import {mapActions} from 'vuex'
-import Vue from 'vue'; 
+import Vue from 'vue';
 export default{
     name:'LoginComponent',
     data(){
@@ -9,13 +9,15 @@ export default{
         login:false
         }
     },
-    methods:{
-        ...mapActions('authStore',['AUTH_LOGIN']),
+    computed:{
         validator(){
             if(this.username=="" || this.password=="")
                 return true;
             return false;
-        },
+        }
+    },
+    methods:{
+        ...mapActions('authStore',['AUTH_LOGIN']),
         signin(e){
             e.preventDefault();
             this.login=true

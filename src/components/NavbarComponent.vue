@@ -16,11 +16,11 @@
           <img
             :src="require('@/assets/images.jpeg')"
             class="d-inline-block align-top ml-4"
-            alt="Kitten"
+            alt="Qblogers"
             width="40"
             height="40"
           />
-          <b-nav-item href="#">QBloggers</b-nav-item>
+          <b-nav-item href="/home">QBloggers</b-nav-item>
         </b-navbar-brand>
       </b-navbar-nav>
 
@@ -33,7 +33,8 @@
               :class="{ 'nav-link': true, active: link.active }"
               :to="link.url"
             >
-              {{ link.text }}
+                <span><i :class='[link.icons,"mr-2"]' aria-hidden="true"></i></span>
+        <small>{{ link.text }}</small>
             </router-link>
           </b-nav-item>
           <b-nav-item>
@@ -62,26 +63,30 @@
       <b-row>
         <b-col
           lg="2"
-          class="d-none d-lg-block border-right"
+          class="d-none d-lg-block border-right sticky-top"
           style="
+            height: 100vh;
+            z-index: 1000;
+            padding:0px;
+          "
+        >
+          <div class="mt-1" style="
             height: 100vh;
             position: sticky;
             top: 4.5rem;
             width: auto;
             z-index: 1000;
-          "
-        >
-          <div class="mt-1">
+          ">
             <SidebarComponent :links="links" />
           </div>
         </b-col>
-        <b-col>
-          <div
-            style="position: sticky; top: 4.5rem; z-index: 1000"
-            class="bg-light"
-          >
-            <SearchComponent />
-          </div>
+        <b-col >
+            <div
+              style="position: sticky; top: 4rem; z-index: 1000;padding:0.09rem;margin:0"
+              class="bg-light"
+            >
+              <SearchComponent />
+            </div>
           <div class="container mt-3">
             <hr />
             <router-view v-slot="{ Component, route }">

@@ -1,5 +1,4 @@
 import SelectTags from "../SelectTags";
-import TagMixins from "@/mixins/TagMixins";
 import { mapActions, mapGetters } from "vuex";
 import Vue from 'vue';
 
@@ -43,19 +42,11 @@ export default{
             required:false
         }
     },
-    mixins:[TagMixins],
-    mounted(){
-        this.fetchTags({
-            success:()=>{
-               // this.tags=res;
-        },   
-        fail:(err)=>{
-            console.log(err)
-        }
-    })
-    },
     computed:{
-        ...mapGetters('authStore',['getUser'])
+        ...mapGetters('authStore',['getUser']),
+        setDisabled:function(){
+            return this.tagName=='' || this.tagDescription=='' || this.loading?true:false;
+        }
     },
     methods:{
         ...mapActions('tagStore',['ADD_NEW_TAG','UPDATE_TAG']),

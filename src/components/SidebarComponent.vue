@@ -1,12 +1,13 @@
 <template>
   <div class="sidebar">
-    <b-nav-item class="nav flex-column">
+    <b-nav-item class="nav flex-column" >
       <router-link
         v-for="link in links"
         :key="link.text"
         :class="{ 'nav-link': true, active: isActive(link.url) }"
         :to="link.url"
       >
+        <span><i :class='[link.icons,"mr-2"]' aria-hidden="true"></i></span>
         <small>{{ link.text }}</small>
       </router-link>
     </b-nav-item>
@@ -14,6 +15,10 @@
 </template>
 <script src="./js/sidebar.js"/>
 <style scoped>
+.sidebar{
+  position:fixed;
+  width:16%;
+}
 a .active {
   font-weight: bold;
   background: #f1f2f3;

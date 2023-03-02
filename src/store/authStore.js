@@ -22,8 +22,6 @@ const authStore={
     },
     actions:{
         AUTH_LOGIN({commit},{success,fail,data}){
-            // const {email,password}=data;
-            // let authemp;
                 AuthService.authUser({data,
                     success:(res)=>{
                         commit("setLogin",res.data);
