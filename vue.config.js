@@ -26,5 +26,8 @@ module.exports = defineConfig({
         pathRewrite:{'^/four':''}
       }
     }
-  }
+  },
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/blogcreation/'
+    : '/'
 })
